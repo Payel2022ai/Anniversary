@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Our Love Score</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .game-content {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .question {
+            font-family: 'Lobster', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .answers {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .answer-button {
+            font-family: 'Playfair Display', serif;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .answer-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .response {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            margin: 3rem 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            color: #ff1493;
+            animation: slideUp 1s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+        }
+    </style>
+</head>
+<body class="animated">
+    <header>
+        <h1 class="animated-text" style="color: #ff1493;">Check Our Love</h1>
+    </header>
+
+    <div id="gameContent" class="game-content"></div>
+
+    <button id="goHomeButton" class="animated-button" onclick="goHome()" style="background: #ff69b4;">Go Back to Home</button>
+
+    <footer>
+        <p class="animated-text" style="margin: 20px; font-size: 0.9rem; color: #ff1493;">Made with ❤️ for you</p>
+    </footer>
+
+    <script>
+        const gameSteps = [
+            {
+                question: "Do you love me?",
+                answers: [
+                    { text: "Yes", response: "My heart just skipped a beat! 💖", nextStep: 1 },
+                    { text: "No", response: "I'll make you love me... 😉", nextStep: 1 }
+                ]
+            },
+            {
+                question: "Do you know how much I love you?",
+                answers: [
+                    { text: "Yes", response: "Let me prove it even more! 🌟", nextStep: 2 },
+                    { text: "No", response: "Prepare to be amazed... ✨", nextStep: 2 }
+                ]
+            },
+            {
+                question: "Will you be my forever?",
+                answers: [
+                    { text: "Yes", response: "Eternity won't be enough! 💫", nextStep: 3 },
+                    { text: "No", response: "I'll wait until you're ready... ⏳", nextStep: 3 }
+                ]
+            },
+            {
+                question: "Do you believe we're soulmates?",
+                answers: [
+                    { text: "Yes", response: "Our hearts beat as one! 💞", nextStep: 4 },
+                    { text: "No", response: "Let's create our own fairy tale! 📖", nextStep: 4 }
+                ]
+            },
+            {
+                question: "Will you share life's adventures with me?",
+                answers: [
+                    { text: "Yes", response: "The journey begins now! 🌍", nextStep: 5 },
+                    { text: "No", response: "I'll be your guide anyway! 🧭", nextStep: 5 }
+                ]
+            },
+            {
+                question: "Can you see our future together?",
+                answers: [
+                    { text: "Yes", response: "Let's make it reality! 🏡", nextStep: 6 },
+                    { text: "No", response: "Let's paint it together! 🎨", nextStep: 6 }
+                ]
+            },
+            {
+                question: "Ready for the most important question?",
+                answers: [
+                    { text: "Yes", response: "Deep breath... 💍", nextStep: 7 },
+                    { text: "No", response: "Too late to escape now! 😄", nextStep: 7 }
+                ]
+            },
+            {
+                question: "Will you Marry Me?",
+                answers: [
+                    { text: "Yes", response: "", nextStep: -1 },
+                    { text: "No", response: "", nextStep: -1 }
+                ]
+            }
+        ];
+
+        let currentStep = 0;
+
+        function showStep(stepIndex) {
+            const step = gameSteps[stepIndex];
+            const gameContent = document.getElementById('gameContent');
+            
+            const questionEl = document.createElement('div');
+            questionEl.className = 'question';
+            questionEl.textContent = step.question;
+            
+            const answersEl = document.createElement('div');
+            answersEl.className = 'answers';
+            
+            step.answers.forEach((answer) => {
+                const button = document.createElement('button');
+                button.className = 'answer-button';
+                button.textContent = answer.text;
+                button.onclick = () => handleAnswer(answer, stepIndex);
+                answersEl.appendChild(button);
+            });
+            
+            gameContent.innerHTML = '';
+            gameContent.appendChild(questionEl);
+            gameContent.appendChild(answersEl);
+        }
+
+        function handleAnswer(answer, stepIndex) {
+            const gameContent = document.getElementById('gameContent');
+            const responseEl = document.createElement('div');
+            responseEl.className = 'response';
+            responseEl.textContent = answer.response;
+            
+            gameContent.innerHTML = '';
+            gameContent.appendChild(responseEl);
+            
+            setTimeout(() => {
+    if (answer.nextStep === -1) {
+        // Replace with your WhatsApp number (with country code, no spaces/symbols)
+        const phoneNumber = '919073008170'; // Example: 911234567890 for India
+        const defaultMessage = "I love you my love and I'll marry you";
+        
+        // Validate phone number format
+        if(/^\d{10,15}$/.test(phoneNumber)) {
+            const encodedMessage = encodeURIComponent(defaultMessage);
+            window.location.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        } else {
+            alert('Error: Invalid WhatsApp number configuration');
+            window.location.href = 'index.html'; // Redirect home if number is invalid
+        }
+    } else {
+        currentStep = answer.nextStep;
+        showStep(currentStep);
+    }
+}, 2000);
+}
+
+        function goHome() {
+            window.location.href = 'index3.html';
+        }
+
+        showStep(currentStep);
+    </script>
+</body>
+</html>
