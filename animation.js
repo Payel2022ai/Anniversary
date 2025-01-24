@@ -1,10 +1,19 @@
 const quotes = [
-  "Every love story is beautiful, but ours is my favorite.",
-  "You are the finest, loveliest, tenderest, and most beautiful person I have ever known.",
-  "Meeting you was like listening to a song for the first time and knowing it would be my favorite.",
-  "You are my sun, my moon, and all my stars.",
-  "Three years ago, I met you, and my world hasn’t been the same since. From that moment, my heart found its home in you. Here's to the day that changed my life forever.❤️",
-  "You are the most beautiful woman in the world, not just for how you look, but for the kindness in your heart, the sparkle in your eyes, and the love you give so effortlessly.❤️"
+  "Do you have a name, or can I call you mine?" ,
+
+"Are you an artist? Because you're really good at drawing me in." ,
+
+"Do you know what you'd look beautiful in? My arms." ,
+
+"If you were a vegetable, you'd be a 'cute-cumber.'",
+
+"Is your name Google? Because you've got everything I've been searching for.",
+
+"Do you have a Band-Aid? Because I scraped my knee falling for you."
+,
+"Are you a magician? Because whenever I look at you, everyone else disappears.",
+
+"Is your name Wi-Fi? Because I'm feeling a connection.",
 ];
 
 function showQuote(index, element) {
