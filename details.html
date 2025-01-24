@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Love Journey</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&family=Playfair+Display&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Macondo&family=Pacifico&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
       :root {
         --primary-color: #ff4081;
         --secondary-color: #ff6b6b;
+        --accent-color: #cb26d1;
         --bg-gradient: linear-gradient(135deg, #ff9a9e, #fad0c4);
       }
 
@@ -44,6 +41,7 @@
       }
 
       .header h1 {
+        font-family: "Pacifico", cursive;
         font-size: 2.8rem;
         color: #cb26d1;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -124,6 +122,19 @@
         right: -40px;
       }
 
+      .timeline-date {
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        font-family: "Playfair Display", serif;
+      }
+
+      .timeline-content p {
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 300;
+      }
+
       .read-more-btn {
         display: inline-block;
         margin-top: 1rem;
@@ -185,6 +196,7 @@
         opacity: 0;
         transform: translateY(20px);
         animation: textAppear 0.4s 0.2s ease-out forwards;
+        font-family: 'Macondo', cursive;
       }
 
       .close-btn {
@@ -215,19 +227,21 @@
         position: fixed;
         top: 20px;
         right: 20px;
-        padding: 10px;
-        background: #ff4081;
+        padding: 12px 15px;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 50%;
         cursor: pointer;
-        font-family: "Roboto", sans-serif;
         font-size: 1.5rem;
-        transition: background 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+        z-index: 1001;
       }
 
       .menu-icon:hover {
-        background: #ff6b6b;
+        transform: rotate(90deg) scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
       }
 
       .slide-out-panel {
@@ -236,14 +250,16 @@
         right: -300px;
         width: 300px;
         height: 100%;
-        background: #ebe5e6;
-        color: rgb(151, 60, 60);
-        transition: right 0.3s ease;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         z-index: 1000;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
       }
 
       .slide-out-panel.active {
@@ -251,73 +267,74 @@
       }
 
       .logout-button {
-        padding: 10px 20px;
-        background: white;
-        color: #ff4081;
+        padding: 15px 35px;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 30px;
         cursor: pointer;
-        font-family: "Roboto", sans-serif;
-        font-size: 1rem;
-        transition: background 0.3s ease;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+        border: 2px solid rgba(255,255,255,0.2);
+      }
+
+      .logout-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255,255,255,0.3),
+          transparent
+        );
+        transition: 0.5s;
       }
 
       .logout-button:hover {
-        background: #ff6b6b;
-        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
+      }
+
+      .logout-button:hover::before {
+        left: 100%;
+      }
+
+      .logout-button:active {
+        transform: translateY(1px);
       }
 
       @keyframes float {
-        0% {
-          transform: translateY(110vh) rotate(0deg);
-        }
-        100% {
-          transform: translateY(-10vh) rotate(360deg);
-        }
+        0% { transform: translateY(110vh) rotate(0deg); }
+        100% { transform: translateY(-10vh) rotate(360deg); }
       }
 
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateX(-50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
       }
 
       @keyframes modalEntry {
-        from {
-          opacity: 0;
-          transform: translate(-50%, -45%);
-        }
-        to {
-          opacity: 1;
-          transform: translate(-50%, -50%);
-        }
+        from { opacity: 0; transform: translate(-50%, -45%); }
+        to { opacity: 1; transform: translate(-50%, -50%); }
       }
 
       @keyframes textAppear {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       @media (max-width: 768px) {
@@ -354,10 +371,15 @@
         .modal {
           padding: 1.5rem;
         }
+
+        .logout-button {
+          padding: 12px 25px;
+          font-size: 1rem;
+        }
       }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
       <header class="header">
         <h1>Our Love Journey</h1>
@@ -375,9 +397,7 @@
             <div class="timeline-date">2019</div>
             <h2>Our paths crossed for the first time.</h2>
             <p>🌟 Where it all began...</p>
-            <button class="read-more-btn" onclick="showStory(1)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(1)">Read More</button>
           </div>
         </div>
 
@@ -386,9 +406,7 @@
             <div class="timeline-date">Class 11</div>
             <h2>Reconnecting at Tuition</h2>
             <p>Fate brought us together again in the classroom</p>
-            <button class="read-more-btn" onclick="showStory(2)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(2)">Read More</button>
           </div>
         </div>
 
@@ -397,9 +415,7 @@
             <div class="timeline-date">Class 12</div>
             <h2>Reconnecting at Tuition</h2>
             <p>Fate brought us together again in the classroom</p>
-            <button class="read-more-btn" onclick="showStory(3)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(3)">Read More</button>
           </div>
         </div>
 
@@ -408,9 +424,7 @@
             <div class="timeline-date">Final Exams</div>
             <h2>Conversations Begin</h2>
             <p>Late-night chats that bridged our worlds..</p>
-            <button class="read-more-btn" onclick="showStory(4)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(4)">Read More</button>
           </div>
         </div>
 
@@ -419,9 +433,7 @@
             <div class="timeline-date">October 2021</div>
             <h2>A Thoughtful Gift</h2>
             <p>A perfume that spoke volumes.</p>
-            <button class="read-more-btn" onclick="showStory(5)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(5)">Read More</button>
           </div>
         </div>
 
@@ -430,9 +442,7 @@
             <div class="timeline-date">January 20, 2022</div>
             <h2>The Proposal</h2>
             <p>A midnight quarrel turned into a heartfelt confession</p>
-            <button class="read-more-btn" onclick="showStory(6)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(6)">Read More</button>
           </div>
         </div>
 
@@ -441,9 +451,7 @@
             <div class="timeline-date">Present Day</div>
             <h2>Our Ongoing Journey</h2>
             <p>"Together is a beautiful place to be." – Unknown</p>
-            <button class="read-more-btn" onclick="showStory(7)">
-              Read More
-            </button>
+            <button class="read-more-btn" onclick="showStory(7)">Read More</button>
           </div>
         </div>
       </section>
@@ -455,17 +463,14 @@
     </div>
 
     <script>
-     const stories = {
+      const stories = {
         1: `Our paths first crossed in 2019, a fleeting moment that neither of us realized would hold significance in the years to come. At that time, we were mere strangers, each engrossed in our own worlds, unaware of the beautiful journey that destiny had in store for us.`,
         2: `As fate would have it, in Class 11, we found ourselves sharing the same tuition class. You perceived me as distant, perhaps even arrogant, while I quietly admired your kindness and the genuine way you interacted with others. Our initial interactions were minimal, marked by polite nods and occasional glances, each of us forming silent judgments about the other.`,
-        3: `With the progression to Class 12, my observations of you deepened. I became increasingly captivated by your graceful demeanor, the way you treated everyone with respect, and your infectious enthusiasm. These qualities drew me in, and I found myself looking forward to the moments when our paths would intersect, even if just briefly.With the progression to Class 12, my observations of you deepened. I became increasingly captivated by your graceful demeanor, the way you treated everyone with respect, and your infectious enthusiasm. These qualities drew me in, and I found myself looking forward to the moments when our paths would intersect, even if just briefly.`,
+        3: `With the progression to Class 12, my observations of you deepened. I became increasingly captivated by your graceful demeanor, the way you treated everyone with respect, and your infectious enthusiasm. These qualities drew me in, and I found myself looking forward to the moments when our paths would intersect, even if just briefly.`,
         4: `As the pressure of final exams loomed, a bridge between us began to form. Our interactions transitioned from brief exchanges to prolonged conversations on WhatsApp. We delved into discussions about our favorite films, with you introducing me to gems like "Fidaa" and "Rosogolla." These late-night chats became a sanctuary, a space where we shared our dreams, fears, and the minutiae of our daily lives.`,
         5: `In October 2021, before your departure to Bangalore for nursing college, we gathered with friends. Amidst the laughter and shared memories, you presented me with a perfume. This gesture, though simple, resonated deeply with me. It was in that moment that I sensed a deeper connection between us, a bond that transcended friendship.`,
         6: `The night of January 20, 2022, remains etched in my memory. Around 1 AM, during a seemingly trivial quarrel, I felt an overwhelming urge to express my true feelings. Summoning all my courage, I confessed my love for you. The hours that followed were filled with anticipation and uncertainty. As dawn broke, your response arrived—a heartfelt 'yes.' That morning marked the beginning of a new chapter in our lives, one filled with love, understanding, and shared dreams.`,
-        7: `To her family and friends—you’ve watched her grow into the incredible woman she is today. What you’re seeing now is a love built on patience, trust, and countless shared moments. We’ve navigated disagreements, celebrated triumphs, and learned to lean on each other. Your support means the world to us, and we’re excited to keep writing this story with all of you by our side.
-        Reflecting on our journey, it's evident that our love blossomed over time, nurtured by shared experiences and deepening mutual respect. From strangers to soulmates, our story is a testament to the beauty of unexpected connections and the magic that unfolds when two hearts find their way to each other.
-
-It's been 3+ years now, and we continue to support and cherish each other, growing stronger together every day.`,
+        7: `To her family and friends—you’ve watched her grow into the incredible woman she is today. What you’re seeing now is a love built on patience, trust, and countless shared moments. We’ve navigated disagreements, celebrated triumphs, and learned to lean on each other. Your support means the world to us, and we’re excited to keep writing this story with all of you by our side.`
       };
 
       function createHearts() {
@@ -515,5 +520,5 @@ It's been 3+ years now, and we continue to support and cherish each other, growi
 
       document.addEventListener("DOMContentLoaded", createHearts);
     </script>
-  </body>
+</body>
 </html>
