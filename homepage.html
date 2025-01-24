@@ -6,11 +6,74 @@
     <title>Happy Love Anniversary</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&family=Playfair+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .menu-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            background: #ff6b6b;
+        }
+
+        .slide-out-panel {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #ebe5e6;
+            color: rgb(151, 60, 60);
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .slide-out-panel.active {
+            right: 0;
+        }
+
+        .logout-button {
+            padding: 10px 20px;
+            background: white;
+            color: #ff4081;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+    </style>
 </head>
 <body class="animated">
     <header>
         <h1 class="animated-text">Happy 3rd year Love Anniversary my LOVE</h1>
     </header>
+
+    <button class="menu-icon" onclick="togglePanel()">☰</button>
+
+    <div class="slide-out-panel" id="slideOutPanel">
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
 
     <div class="write-erase-container">
         <p class="write-erase">Click on images to see magic</p>
@@ -21,9 +84,6 @@
         <img src="p2.jpeg" alt="Image 2" onclick="showQuote(1, this)" class="animated-img">
         <img src="p3.jpeg" alt="Image 3" onclick="showQuote(2, this)" class="animated-img">
         <img src="p4.jpeg" alt="Image 4" onclick="showQuote(3, this)" class="animated-img">
-        <img src="p5.jpeg" alt="Image 5" onclick="showQuote(4, this)" class="animated-img">
-        <img src="p6.jpeg" alt="Image 6" onclick="showQuote(5, this)" class="animated-img">
-
     </div>
 
     <div id="quoteContainer" class="quote animated-text"></div>
@@ -34,6 +94,25 @@
         <p class="animated-text" style="margin: 20px; font-size: 0.9rem;">Made with ❤️ for you</p>
     </footer>
     
+    <script>
+        function togglePanel() {
+            const panel = document.getElementById('slideOutPanel');
+            panel.classList.toggle('active');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('answered');
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('slideOutPanel');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!panel.contains(event.target) && !menuIcon.contains(event.target)) {
+                panel.classList.remove('active');
+            }
+        });
+    </script>
     <script src="animation.js"></script>
 </body>
 </html>

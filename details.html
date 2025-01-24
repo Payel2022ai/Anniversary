@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Love Story Timeline</title>
+    <title>Our Love Journey</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&family=Playfair+Display&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css" />
     <style>
       :root {
         --primary-color: #ff4081;
@@ -44,7 +45,7 @@
 
       .header h1 {
         font-size: 2.8rem;
-        color: #fff;
+        color: #cb26d1;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
 
@@ -210,6 +211,62 @@
         z-index: 999;
       }
 
+      .menu-icon {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        background: #ff4081;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        font-size: 1.5rem;
+        transition: background 0.3s ease;
+      }
+
+      .menu-icon:hover {
+        background: #ff6b6b;
+      }
+
+      .slide-out-panel {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100%;
+        background: #ebe5e6;
+        color: rgb(151, 60, 60);
+        transition: right 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .slide-out-panel.active {
+        right: 0;
+      }
+
+      .logout-button {
+        padding: 10px 20px;
+        background: white;
+        color: #ff4081;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+      }
+
+      .logout-button:hover {
+        background: #ff6b6b;
+        color: white;
+      }
+
       @keyframes float {
         0% {
           transform: translateY(110vh) rotate(0deg);
@@ -306,6 +363,12 @@
         <h1>Our Love Journey</h1>
       </header>
 
+      <button class="menu-icon" onclick="togglePanel()">☰</button>
+
+      <div class="slide-out-panel" id="slideOutPanel">
+        <button class="logout-button" onclick="logout()">Logout</button>
+      </div>
+
       <section class="timeline">
         <div class="timeline-item">
           <div class="timeline-content">
@@ -392,18 +455,17 @@
     </div>
 
     <script>
-      const stories = {
-        1: `You might not know this, but our story began quietly in 2019. We were strangers then, passing by each other without a second thought. Life had its own plans, though—little did we realize that this fleeting moment was the first thread in a tapestry we’d weave together.`,
-        2: `When we reunited in Class 11 tuition, I’m sure I came across as reserved—maybe even a little aloof! But what I saw in her was impossible to ignore: her kindness, the way she lit up a room, and how effortlessly she made everyone feel valued. We didn’t talk much back then, but even those small moments left a mark.`,
-        3: `By Class 12, I found myself truly captivated. Those of you who know her well will understand—it’s her grace, her warmth, and that spark of joy she carries everywhere. Even amid exam stress, I’d catch myself smiling at her laughter or the way she’d encourage others. She has a gift for making ordinary moments feel special, doesn’t she?`,
-        4: `As exams loomed, our chats spilled into late-night WhatsApp calls. We’d dissect movies (thank her for introducing me to ‘Fidaa,’ by the way!), swap stories, and share worries. Those conversations became my favorite part of the day—a safe space where we let our guard down. I think that’s when I truly began falling for her.`,
-        5: `Remember her farewell gathering in October 2021, before she left for Bangalore? That night, she handed me a perfume—a simple gesture, but to me, it felt like a quiet promise. It wasn’t just a gift; it was a reminder that even distance couldn’t dim what was growing between us.`,
-        6: `On January 20, 2022, during a silly argument at 1 AM, I finally confessed what my heart had held onto for months. The wait for her reply felt endless—but when her ‘yes’ came at sunrise, it felt like the world shifted. That day, we stepped into a love that’s only grown stronger with time. Three years later, I’m still grateful every morning I wake up knowing she’s mine
-
-Reflecting on our journey, it's evident that our love blossomed over time, nurtured by shared experiences and deepening mutual respect. From strangers to soulmates, our story is a testament to the beauty of unexpected connections and the magic that unfolds when two hearts find their way to each other.
+     const stories = {
+        1: `Our paths first crossed in 2019, a fleeting moment that neither of us realized would hold significance in the years to come. At that time, we were mere strangers, each engrossed in our own worlds, unaware of the beautiful journey that destiny had in store for us.`,
+        2: `As fate would have it, in Class 11, we found ourselves sharing the same tuition class. You perceived me as distant, perhaps even arrogant, while I quietly admired your kindness and the genuine way you interacted with others. Our initial interactions were minimal, marked by polite nods and occasional glances, each of us forming silent judgments about the other.`,
+        3: `With the progression to Class 12, my observations of you deepened. I became increasingly captivated by your graceful demeanor, the way you treated everyone with respect, and your infectious enthusiasm. These qualities drew me in, and I found myself looking forward to the moments when our paths would intersect, even if just briefly.With the progression to Class 12, my observations of you deepened. I became increasingly captivated by your graceful demeanor, the way you treated everyone with respect, and your infectious enthusiasm. These qualities drew me in, and I found myself looking forward to the moments when our paths would intersect, even if just briefly.`,
+        4: `As the pressure of final exams loomed, a bridge between us began to form. Our interactions transitioned from brief exchanges to prolonged conversations on WhatsApp. We delved into discussions about our favorite films, with you introducing me to gems like "Fidaa" and "Rosogolla." These late-night chats became a sanctuary, a space where we shared our dreams, fears, and the minutiae of our daily lives.`,
+        5: `In October 2021, before your departure to Bangalore for nursing college, we gathered with friends. Amidst the laughter and shared memories, you presented me with a perfume. This gesture, though simple, resonated deeply with me. It was in that moment that I sensed a deeper connection between us, a bond that transcended friendship.`,
+        6: `The night of January 20, 2022, remains etched in my memory. Around 1 AM, during a seemingly trivial quarrel, I felt an overwhelming urge to express my true feelings. Summoning all my courage, I confessed my love for you. The hours that followed were filled with anticipation and uncertainty. As dawn broke, your response arrived—a heartfelt 'yes.' That morning marked the beginning of a new chapter in our lives, one filled with love, understanding, and shared dreams.`,
+        7: `To her family and friends—you’ve watched her grow into the incredible woman she is today. What you’re seeing now is a love built on patience, trust, and countless shared moments. We’ve navigated disagreements, celebrated triumphs, and learned to lean on each other. Your support means the world to us, and we’re excited to keep writing this story with all of you by our side.
+        Reflecting on our journey, it's evident that our love blossomed over time, nurtured by shared experiences and deepening mutual respect. From strangers to soulmates, our story is a testament to the beauty of unexpected connections and the magic that unfolds when two hearts find their way to each other.
 
 It's been 3+ years now, and we continue to support and cherish each other, growing stronger together every day.`,
-        7: `To her family and friends—you’ve watched her grow into the incredible woman she is today. What you’re seeing now is a love built on patience, trust, and countless shared moments. We’ve navigated disagreements, celebrated triumphs, and learned to lean on each other. Your support means the world to us, and we’re excited to keep writing this story with all of you by our side.`,
       };
 
       function createHearts() {
@@ -432,6 +494,24 @@ It's been 3+ years now, and we continue to support and cherish each other, growi
         modal.style.display = "none";
         document.body.style.overflow = "auto";
       }
+
+      function togglePanel() {
+        const panel = document.getElementById("slideOutPanel");
+        panel.classList.toggle("active");
+      }
+
+      function logout() {
+        sessionStorage.removeItem("answered");
+        window.location.href = "index.html";
+      }
+
+      document.addEventListener("click", function (event) {
+        const panel = document.getElementById("slideOutPanel");
+        const menuIcon = document.querySelector(".menu-icon");
+        if (!panel.contains(event.target) && !menuIcon.contains(event.target)) {
+          panel.classList.remove("active");
+        }
+      });
 
       document.addEventListener("DOMContentLoaded", createHearts);
     </script>
