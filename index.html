@@ -3,37 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Love Anniversary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&family=Playfair+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Anniversary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #ff4081;
+            overflow-x: hidden;
+        }
+
+        /* Love Portal Styling */
+        .portal-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            animation: portalOpen 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portal-content {
+            position: relative;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 90%;
+            width: 500px;
+        }
+
+        .portal-question {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ff4081;
+            animation: textFloat 3s ease-in-out infinite;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .portal-button {
+            flex: 1;
+            max-width: 200px;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ff4081, #ff6b6b);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+        }
+
+        .portal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
+        }
+
+        /* Animations */
+        @keyframes portalOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .portal-content {
+                padding: 1.5rem;
+            }
+
+            .portal-question {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .button-container {
+                flex-direction: row;
+                gap: 0.8rem;
+            }
+
+            .portal-button {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+                max-width: 150px;
+            }
+        }
+    </style>
 </head>
-<body class="animated">
-    <header>
-        <h1 class="animated-text">Happy 3rd year Love Anniversary my LOVE</h1>
-    </header>
-
-    <div class="write-erase-container">
-        <p class="write-erase">Click on images to see magic</p>
+<body>
+    <div id="lovePortal" class="portal-modal">
+        <div class="portal-content">
+            <h2 class="portal-question">Who is entering into our love story?</h2>
+            <div class="button-container">
+                <button class="portal-button" onclick="enterPortal('homepage.html')">Payel💖</button>
+                <button class="portal-button" onclick="enterPortal('details.html')">Her Friend/Family🌸</button>
+            </div>
+        </div>
     </div>
 
-    <div class="gallery">
-        <img src="P1.jpeg" alt="Image 1" onclick="showQuote(0, this)" class="animated-img">
-        <img src="p2.jpeg" alt="Image 2" onclick="showQuote(1, this)" class="animated-img">
-        <img src="p3.jpeg" alt="Image 3" onclick="showQuote(2, this)" class="animated-img">
-        <img src="p4.jpeg" alt="Image 4" onclick="showQuote(3, this)" class="animated-img">
-        <img src="p5.jpeg" alt="Image 5" onclick="showQuote(4, this)" class="animated-img">
-        <img src="p6.jpeg" alt="Image 6" onclick="showQuote(5, this)" class="animated-img">
+    <script>
+        // Session Management
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.removeItem('lovePortalEntry');
+        });
 
-    </div>
+        // Initialize Portal
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('lovePortalEntry')) {
+                document.getElementById('lovePortal').style.display = 'flex';
+            } else {
+                document.getElementById('lovePortal').style.display = 'none';
+            }
+        });
 
-    <div id="quoteContainer" class="quote animated-text"></div>
+        // Portal Entry Function
+        function enterPortal(page) {
+            sessionStorage.setItem('lovePortalEntry', 'true');
+            document.body.style.animation = 'portalExit 0.5s forwards';
+            
+            setTimeout(() => {
+                window.location.href = page;
+            }, 500);
+        }
 
-    <button id="checkLoveButton" class="animated-button" onclick="launchGame()">Check Our Love Score</button>
-
-    <footer>
-        <p class="animated-text" style="margin: 20px; font-size: 0.9rem;">Made with ❤️ for you</p>
-    </footer>
-    
-    <script src="animation.js"></script>
+        // Add exit animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes portalExit {
+                to {
+                    opacity: 0;
+                    transform: scale(0.95);
+                    filter: blur(10px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

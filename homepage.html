@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Love Anniversary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="animated">
+    <header>
+        <h1 class="animated-text">Happy 3rd year Love Anniversary my LOVE</h1>
+    </header>
+
+    <div class="write-erase-container">
+        <p class="write-erase">Click on images to see magic</p>
+    </div>
+
+    <div class="gallery">
+        <img src="P12.jpeg" alt="Image 1" onclick="showQuote(0, this)" class="animated-img">
+        <img src="p22.jpeg" alt="Image 2" onclick="showQuote(1, this)" class="animated-img">
+        <img src="p32.jpeg" alt="Image 3" onclick="showQuote(2, this)" class="animated-img">
+        <img src="p42.jpeg" alt="Image 4" onclick="showQuote(3, this)" class="animated-img">
+        <img src="p52.jpeg" alt="Image 5" onclick="showQuote(4, this)" class="animated-img">
+        <img src="p62.jpeg" alt="Image 6" onclick="showQuote(5, this)" class="animated-img">
+
+    </div>
+
+    <div id="quoteContainer" class="quote animated-text"></div>
+
+    <button id="checkLoveButton" class="animated-button" onclick="launchGame()">Check Our Love Score</button>
+
+    <footer>
+        <p class="animated-text" style="margin: 20px; font-size: 0.9rem;">Made with ❤️ for you</p>
+    </footer>
+    
+    <script src="animation.js"></script>
+</body>
+</html>
